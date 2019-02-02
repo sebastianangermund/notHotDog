@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Photo sharing site</h1>
+{% if photo_list %}
+    <p>The photo library currently contain:</p>
+    <ul>
+        <p>
+            {{ photo_list.all.count }} <strong>Photos</strong> 
+        </p>
+    </ul>
+{% else %}
+        <p>There are no uploaded photos.</p>
+{% endif %}
+{% endblock %}

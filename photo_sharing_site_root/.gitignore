@@ -1,0 +1,14 @@
+/env
+/media
+/static
+/db.sqlite3
+/node_modules
+
+local_settings.py
+.module-cache
+.sass-cache
+.tmp
+
+.DS_Store
+__pycache__
+*.py[co]

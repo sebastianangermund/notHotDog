@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Title: {{ photo.title }}</h1>
+
+<p><strong>Uploader: </strong>{{ photo.owner }}</p>
+{% load static %}
+{% if photo.flagged %}
+    <p><strong>Error message:</strong> We have reason to belive that this photo does not depict a hotdog.</p>
+{% else %}
+    {% if photo.photo %}
+        <img src="{{ photo.photo.url }}" alt="image" style="width:555px;height:540px;">
+    {% else %}
+            <p><strong>Error message:</strong> No file found</p>
+    {% endif %}
+{% endif %}
+<p><strong>Description: </strong>{{ photo.description }}</a></p>
+</div>
+{% endblock %}

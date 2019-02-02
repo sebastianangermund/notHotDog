@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>My uploaded photos</h1>
+
+    {% if photo_list %}
+    <ul>
+        {% for photo in photo_list %} 
+            <li>
+            <a href="{% url 'my-photo-detail' photo.pk %}">{{ photo.title }}</a>        
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>You have no uploaded photos.</p>
+    {% endif %}
+    <p><a href="{% url 'create-photo' %}">Upload new photo</a></p>
+{% endblock %}
