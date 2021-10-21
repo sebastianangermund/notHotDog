@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 def load_labels(label_file):
     """Labels created in model training"""
     label = []
-    proto_as_ascii_lines = tf.gfile.GFile(label_file).readlines()
+    proto_as_ascii_lines = tf.io.gfile.GFile(label_file).readlines()
     for l in proto_as_ascii_lines:
         label.append(l.rstrip())
     return label
@@ -21,9 +21,8 @@ def load_labels(label_file):
 
 def load_graph(model_file):
     """Graph created in model training"""
-
-    graph = tf.Graph()
-    graph_def = tf.GraphDef()
+    graph = tf.compat.v1.Graph()
+    graph_def = tf.compat.v1.GraphDef()
 
     with open(model_file, "rb") as f:
         graph_def.ParseFromString(f.read())
@@ -42,7 +41,7 @@ def init_classification(t):
     input_operation = graph.get_operation_by_name(input_name)
     output_operation = graph.get_operation_by_name(output_name)
 
-    with tf.Session(graph=graph) as sess:
+    with tf.compat.v1.Session(graph=graph) as sess:
         results = sess.run(
             output_operation.outputs[0],
             {input_operation.outputs[0]: t},
