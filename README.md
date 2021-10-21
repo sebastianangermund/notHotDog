@@ -93,5 +93,6 @@ Now tortil.jpg should have been placed in location defined in Photo model, and t
 
 #### Clear Rabbit queue
 ```bash
-$ rabbitmqadmin delete queue name=name_of_queue
+$ sudo rabbitmqctl list_queues
+$ sudo rabbitmqctl purge_queue <queue_name>
 ```
