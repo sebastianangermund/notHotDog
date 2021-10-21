@@ -2,12 +2,12 @@ import os
 import uuid
 import pika
 import json
-import datetime
+
 import tensorflow as tf
+tf.compat.v1.disable_eager_execution() # quick fix for tf v2 compatability
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.conf import settings
 from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -103,7 +103,7 @@ def read_tensor_from_image_file(file_name,
                                 input_mean=0,
                                 input_std=255):
     input_name = "file_reader"
-    file_reader = tf.read_file(file_name, input_name)
+    file_reader = tf.io.read_file(file_name, input_name)
     if file_name.endswith(".png"):
         image_reader = tf.image.decode_png(
             file_reader, channels=3, name="png_reader")
@@ -119,12 +119,10 @@ def read_tensor_from_image_file(file_name,
         return 'NOT_SUPPORTED'
     float_caster = tf.cast(image_reader, tf.float32)
     dims_expander = tf.expand_dims(float_caster, 0)
-    resized = tf.image.resize_bilinear(
+    resized = tf.image.resize(
         dims_expander,
         [input_height, input_width]
     )
     normalized = tf.divide(tf.subtract(resized, [input_mean]), [input_std])
-    sess = tf.Session()
-    result = sess.run(normalized)
-
-    return result
+    with tf.compat.v1.Session() as sess:
+        return sess.run(normalized)

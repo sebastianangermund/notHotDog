@@ -2,3 +2,9 @@
 __pycache__
 hotdog_photos
 other_food_photos
+node_modules/
+env/
+media/
+db.sqlite*
+static/
+node_modules/
