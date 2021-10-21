@@ -2,7 +2,7 @@
 * Create a virtualenv and activate in the project root.
 * Install requirements from the requirements.txt file.
 * [Setup a rabbitmq-server](https://www.rabbitmq.com/install-debian.html#apt-quick-start-cloudsmith) litsening on port 5672 (default).
-* The classifier network is pre-trained. But you can re-train if you want. There is a script for training under classifier/ __It's based on Tensorflow v1 though so you'll have to fox compatability__
+* The classifier network is pre-trained. But you can re-train if you want. There is a script for training under classifier/ __It's based on Tensorflow v1 though so you'll have to fix compatability__
 
 #### To test project features:
 
